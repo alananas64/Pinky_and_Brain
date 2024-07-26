@@ -20,10 +20,9 @@ int is_empty(const char *str)
 {
 	if (!str)
 		return (1);
-
 	while (*str)
-	if (!isspace(*(str++)))
-	return (0);
+		if (!isspace(*(str++)))
+			return (0);
 	return (1);
 }
 
@@ -67,12 +66,22 @@ void	extract_redirections(char	*str_line, t_cmdline *command)
 	{
 		if (*str == '<')
 		{
+			// if (*str == '<' && *str + 1 == '<')
+			// {
+			// 	free (command->input_redirect);
+			// 	command->input_redirect = copy_word(str + 1);
+			// }
 			free (command->input_redirect);
 			command->input_redirect = copy_word(str + 1);
 		}
-		else
+		else if (*str == '>')
 		{
-			free (command->output_redirect);
+			// if (*str == '>' && *str + 1 == '>')
+			// {
+			// 	free (command->output_redirect);
+			// 	command->output_redirect = copy_word(str+1);
+			// }
+			// free (command->output_redirect);
 			command->output_redirect = copy_word(str+1);
 		}
 		*(str++) = 0;
