@@ -17,12 +17,14 @@ typedef struct s_cmdline
 	struct s_cmdline	*next;
 }	t_cmdline;
 
+//--------------------------lexer.c-----------------------
+char	**check_quotes(char **pipe_splitted);
+char	*trimcleanstring(char *str);
 char	**lexer(char *user_input);
 char	**split_string(const char *s, char delimiter);
-// int			ft_isspace(int c);
-// int			is_empty(const char *str);
-// char		*str_clone(const char *source);
-// t_cmdline	*parset_cmdlines(char* line);
+
+//--------------------------split_w_qoutes.c--------------
+int		count_substrings(const char *s, char delimiter, int *double_quote, int *single_quote);
 
 #endif
 

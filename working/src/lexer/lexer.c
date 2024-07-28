@@ -73,8 +73,5 @@ char	**lexer(char *user_input)
 	checked_quotes = check_quotes(pipe_splitted);
 	if (*user_input || *no_spaces_input)
 		add_history(user_input);
-
 	return (checked_quotes);
 }
-// this function does not handle the follwoing case :
-// ls -la libft | cat input.t"x't"

@@ -8,7 +8,7 @@
 
 extern char **environ;
 
-/* to understand 
+/* to understand
 
 int main()
 {

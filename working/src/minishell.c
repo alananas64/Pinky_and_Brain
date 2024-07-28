@@ -12,7 +12,7 @@ int	interactive_mode(void)
 			return (perror("realine error"), 126);
 		printf ("\tuser_input: {%s}\n", user_input);
 		command = lexer(user_input);
-		int i = 0;
+		int i = 0; // debugging while loop
 		while(command[i])
 		{
 			printf("string[%i] = {%s}\n", i, command[i]);
