@@ -3,22 +3,29 @@
 int	interactive_mode(void)
 {
 	char		*user_input;
-	char		**command; /* will run the command */
+	char		**command;
+	t_cmdline	command_struct;
 
 	while (1)
 	{
-		user_input = readline("minishell-v1$ ");
+		user_input = readline("😎minishell-v1$ ");
 		if (!user_input)
 			return (perror("realine error"), 126);
 		printf ("\tuser_input: {%s}\n", user_input);
 		command = lexer(user_input);
-		int i = 0; // debugging while loop
-		while(command[i])
-		{
-			printf("string[%i] = {%s}\n", i, command[i]);
-			i++;
-		}
-		free (user_input);
+		initialize_struct(&command_struct);
+		extract_redirections(*command , &command_struct);
+		printf("Input redirect: %s\n", command_struct.input_redirect);
+		printf("Output redirect: %s\n", command_struct.output_redirect);
+		free(command_struct.input_redirect);//-----------------------------free function------------------------
+		free(command_struct.output_redirect);//-----------------------------free function------------------------
+	// 	int i = 0; // debugging while loop
+	// 	while(command[i])
+	// 	{
+	// 		printf("string[%i] = {%s}\n", i, command[i]);
+	// 		i++;
+	// 	}
+	// 	free (user_input);//-----------------------------free function------------------------
 	}
 
 	return (0);
@@ -32,26 +39,3 @@ int	main(int ac, char **av)
 		return (printf ("vegy sed!"), 126); /* returns a random value does not have a meaning */
 	return (0);
 }
-//ls -la libft | cat input.txt
-// user_input = "echo hello | echo he\'ll\'o";
-//cc -lreadline src/minishell.c src/parse/*.c -o minishell
-
-/**
- * qoutes or not (double and single)
- * expansion $ ($PATH $HOME) get it from env
- *
-*/
-
-/**
- * command
- * flags
- * piped or not
-*/
-
-/**
- * $ " ' ! < >
- * << (heredoc)
- * >> < > redirections
- *
- * "   '$HOME' "
-*/

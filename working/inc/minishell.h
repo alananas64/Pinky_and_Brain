@@ -22,9 +22,15 @@
 # include <fcntl.h>
 # include <errno.h>
 
+typedef struct {
+    char *input_redirect;
+    char *output_redirect;
+} t_cmdline;
+
 // --------------------------------- minishell.c ------------------------------
 int	interactive_mode(void);
-
+void	initialize_struct(t_cmdline *command);
+void	extract_redirections(char	*str_line, t_cmdline *command);
 /* --------------------------------- minishell ------------------------------ */
 
 /* --------------------------------- minishell ------------------------------ */

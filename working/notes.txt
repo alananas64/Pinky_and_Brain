@@ -1,0 +1,30 @@
+/**
+ * qoutes or not (double and single)
+ * expansion $ ($PATH $HOME) get it from env
+ *
+*/
+
+/**
+ * command
+ * flags
+ * piped or not
+*/
+
+/**
+ * $ " ' ! < >
+ * << (heredoc)
+ * >> < > redirections
+ *
+ * "   '$HOME' "
+*/
+
+
+***************  work DONE  **************
+quites
+split with pipes
+redirections
+
+
+
+!!!!!!!!WARNINGS!!!!!!!!!!
+make command is not working .....31 july
