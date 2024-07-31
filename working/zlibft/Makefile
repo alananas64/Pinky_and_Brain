@@ -66,15 +66,15 @@ all:
 	@$(MAKE) -j$(NUMPROC) $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS) $(OBONUS)
-	ar -rcs $@ $(OBJS) $(OBONUS)
+	@ar -rcs $@ $(OBJS) $(OBONUS)
 
 %.o: %.c $(HEADERS) $(OBONUS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJS) $(OBONUS)
+	@rm -rf $(OBJS) $(OBONUS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all

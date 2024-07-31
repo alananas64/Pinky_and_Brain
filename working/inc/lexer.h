@@ -6,6 +6,8 @@
 # include "minishell.h"
 # include <string.h>
 # include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 // typedef struct s_cmdline
 // {
