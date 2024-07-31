@@ -25,8 +25,8 @@ char	*trimcleanstring(char *str);
 char	**lexer(char *user_input);
 
 //--------------------------split_w_qoutes.c--------------
-int			count_substrings(const char *s, char delimiter, int *double_quote, int *single_quote);
-char		**split_string(const char *s, char delimiter);
+int		count_substrings(const char *s, char delimiter, int *double_quote, int *single_quote);
+char	**split_string(const char *s, char delimiter);
 
 //--------------------------redirections.c----------------
 

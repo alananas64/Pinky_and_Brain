@@ -52,18 +52,12 @@ BONUS := ft_lstnew.c \
 HEADERS := libft.h
 
 OBJS := $(SRCS:.c=.o)
+OBJS += $(BONUS:.c=.o)
 NAME := libft.a
 
 .PHONY: all clean fclean re
 
-ifeq ($(UNAME), Linux)
-	NUMPROC := $(shell grep -c ^processor /proc/cpuinfo)
-else ifeq ($(UNAME), Darwin)
-	NUMPROC := $(shell sysctl -n hw.ncpu)
-endif
-
-all: 
-	@$(MAKE) -j$(NUMPROC) $(LIBFT) $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS) $(OBONUS)
 	@ar -rcs $@ $(OBJS) $(OBONUS)

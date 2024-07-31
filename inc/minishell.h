@@ -65,9 +65,9 @@ typedef struct s_command
 
 typedef struct s_minishell
 {
-	char	**env;
-	char	*pwd;
-	t_token	*history;
+	char		**env;
+	char		*pwd;
+	t_token		*history;
 	t_command	*commands;
 }	t_minishell;
 

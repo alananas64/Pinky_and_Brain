@@ -1,5 +1,24 @@
 #include "../inc/minishell.h"
 
+void wr_color(const char *color, const char *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	printf("%s", color);
+	vprintf(format, args);
+	printf("%s", RESET_COLOR);
+	va_end(args);
+}
+
+/**
+ * RED
+ * GREEN
+ * YELLOW
+ * BLUE
+ * MAGENTA
+ * CYAN
+*/
+
 int	interactive_mode(void)
 {
 	char		*user_input;
@@ -11,14 +30,14 @@ int	interactive_mode(void)
 		user_input = readline("😎minishell-v1$ ");
 		if (!user_input)
 			return (perror("realine error"), 126);
-		printf ("\tuser_input: {%s}\n", user_input);
+		wr_color (GREEN, "\tuser_input: {%s}\n", user_input);
 		command = lexer(user_input);
 		initialize_struct(&command_struct);
 		extract_redirections(*command , &command_struct);
-		printf("Input redirect: %s\n", command_struct.input_redirect);
-		printf("Output redirect: %s\n", command_struct.output_redirect);
-		free(command_struct.input_redirect);//-----------------------------free function------------------------
-		free(command_struct.output_redirect);//-----------------------------free function------------------------
+		printf("Input redirect: {%s}\n", command_struct.input_redirect);
+		printf("Output redirect: {%s}\n", command_struct.output_redirect);
+		free(command_struct.input_redirect);	//-----------------------------free function------------------------
+		free(command_struct.output_redirect);	//-----------------------------free function------------------------
 	// 	int i = 0; // debugging while loop
 	// 	while(command[i])
 	// 	{
