@@ -1,10 +1,11 @@
 NAME		=	minishell
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -O2 -Og -Iinc
-CFLAGS		+=	-fstack-protector-strong -Wformat=2 -Wformat-security \
-				-Wformat-nonliteral -Wcast-align -Wpointer-arith
 
-
+# CFLAGS		+=	-Wall -Wextra -Werror -pedantic -pedantic-errors -Wformat=2 \
+# 				-Wformat-security -Wcast-align -O2 -Og -g -Wno-unused-result \
+# 				-fsanitize=address -fsanitize=undefined -Wno-unused-variable \
+# 				-Wpointer-arith -fstack-protector-strong
 
 LDFLAGS		=	-L$(LIBFT_DIR) -lft -lreadline
 

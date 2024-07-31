@@ -1,11 +1,25 @@
 #include "../inc/minishell.h"
 
+// void wr_color(const char *color, const char *format, ...)
+// {
+// 	va_list	args;
+
+// 	va_start(args, format);
+// 	printf("%s", color);
+// 	vfprintf(stdout, format, args);
+// 	printf("%s", RESET_COLOR);
+// 	va_end(args);
+// }
+
 void wr_color(const char *color, const char *format, ...)
 {
-	va_list args;
+	va_list	args;
+	char buffer[1024];
+
 	va_start(args, format);
 	printf("%s", color);
-	vprintf(format, args);
+	vsnprintf(buffer, 1024, format, args);
+	fputs(buffer, stdout);
 	printf("%s", RESET_COLOR);
 	va_end(args);
 }
