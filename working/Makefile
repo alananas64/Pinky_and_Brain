@@ -46,8 +46,8 @@ UNAME	:= $(shell uname -s)
 # **************************************************************************** #
 
 ifeq ($(UNAME), Linux)
-	CFLAGS += -D LINUX -Wno-unused-result
-	NUMPROC := $(shell grep -c ^processor /proc/cpuinfo)
+	CFLAGS	+=	-D LINUX -Wno-unused-result
+	NUMPROC	:=	$(shell grep -c ^processor /proc/cpuinfo)
 else ifeq ($(UNAME), Darwin)
 	NUMPROC := $(shell sysctl -n hw.ncpu)
 endif
@@ -72,5 +72,8 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	make -C $(LIBFT_DIR) fclean
+
+debug: CFLAGS += -g3 -fsanitize=address
+debug: all
 
 re: fclean all

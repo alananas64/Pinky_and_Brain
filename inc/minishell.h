@@ -26,16 +26,22 @@
 
 /* --------------------------------- minishell ------------------------------ */
 
-// extern char **environ;
-
 // structs
-typedef enum
+typedef enum e_token
 {
-	WORD,
-	OPERATOR,
-	PIPE,
-	/* ... */
-}	token_type;
+	Word,
+	Name,
+	Assign,
+	Op_redir,
+	Op_pipe,
+	Variable,
+	Sq_open,
+	Sq_closed,
+	Dq_open,
+	Dq_closed,
+	Whitespace,
+	Illegal
+}	t_token;
 
 // Define a t_token structure
 typedef struct s_token
@@ -53,15 +59,15 @@ typedef struct s_command
 	struct s_command	*next;
 }	t_command;
 
-// typedef struct s_cmdline
-// {
-// 	char				*arguments[MAX_ARGUMENTS];
-// 	int					argcount;
-// 	char const			*input_redirect;
-// 	char const			*output_redirect;
-// 	int					background;
-// 	struct s_cmdline	*next;
-// }	t_cmdline;
+typedef struct s_cmdline
+{
+	char				*arguments[MAX_ARGUMENTS];
+	int					argcount;
+	char const			*input_redirect;
+	char const			*output_redirect;
+	int					background;
+	struct s_cmdline	*next;
+}	t_cmdline;
 
 typedef struct s_minishell
 {
