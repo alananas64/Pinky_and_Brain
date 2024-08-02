@@ -1,7 +1,6 @@
 #include "../../inc/lexer.h"
 #include "../../inc/minishell.h"
 
-
 char **check_quotes(char **pipe_splitted)
 {
 	int i = 0;
