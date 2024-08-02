@@ -4,17 +4,11 @@
 # define MAX_INPUT 262144
 # define MAX 2048
 
-# define RESET_COLOR "\033[0m"
-# define RED "\033[31m"
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define BLUE "\033[34m"
-# define MAGENTA "\033[35m"
-# define CYAN "\033[36m"
-
-# include <stdarg.h>
-
+# include "minishell.h"
+# include "struct.h"
 # include "lexer.h"
+# include "exec.h"
+
 # include <unistd.h>
 # include <stdio.h>
 # include <ctype.h>
@@ -32,27 +26,11 @@
 # include <fcntl.h>
 # include <errno.h>
 
-// structs
-typedef enum
-{
-	WORD,
-	OPERATOR,
-	PIPE,
-	/* ... */
-}	token_type;
-
-typedef struct s_cmdline
-{
-	char				*cmd;
-    char				*input_redirect;
-    char				*output_redirect;
-	struct s_cmdline	*next;
-}	t_cmdline;
-
 // --------------------------------- minishell.c ------------------------------
 int		interactive_mode(void);
 void	initialize_struct(t_cmdline *command);
 void	extract_redirections(char	*str_line, t_cmdline *command);
+void	print_debug(t_cmdline *cmdline);
 /* --------------------------------- minishell ------------------------------ */
 
 /* --------------------------------- minishell ------------------------------ */
@@ -71,10 +49,10 @@ void	extract_redirections(char	*str_line, t_cmdline *command);
 
 /* --------------------------------- builtin -------------------------------- */
 
-
-/* --------------------------------- minishell ------------------------------ */
-
 /* --------------------------------- parser --------------------------------- */
+
+
+
 /* --------------------------------- parser --------------------------------- */
 
 /* --------------------------------- exec ----------------------------------- */
