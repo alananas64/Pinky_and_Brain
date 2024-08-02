@@ -57,6 +57,23 @@ NAME := libft.a
 
 .PHONY: all clean fclean re
 
+# **************************************************************************** #
+# Makefile builtin approach
+# **************************************************************************** #
+UNAME	:= $(shell uname -s)
+
+# **************************************************************************** #
+#   SYSTEM SPECIFIC SETTINGS                                                   #
+# **************************************************************************** #
+
+ifeq ($(UNAME), Linux)
+	CFLAGS	+=	-D LINUX -Wno-unused-result
+	NUMPROC	:=	$(shell grep -c ^processor /proc/cpuinfo)
+else ifeq ($(UNAME), Darwin)
+	NUMPROC := $(shell sysctl -n hw.ncpu)
+endif
+
+all: MAKEFLAGS	+=	-j$(NUMPROC)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(OBONUS)

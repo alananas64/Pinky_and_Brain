@@ -2,10 +2,10 @@ NAME		=	minishell
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -O2 -Og -Iinc
 
-# CFLAGS		+=	-Wall -Wextra -Werror -pedantic -pedantic-errors -Wformat=2 \
-# 				-Wformat-security -Wcast-align -O2 -Og -g -Wno-unused-result \
-# 				-fsanitize=address -fsanitize=undefined -Wno-unused-variable \
-# 				-Wpointer-arith -fstack-protector-strong
+# CFLAGS		+=	-pedantic -pedantic-errors -Wformat=2 -Wformat-security \
+# 				-Wcast-align -O2 -Og -g -Wpointer-arith \
+# 				-fsanitize=address -fsanitize=undefined \
+# 				-fstack-protector-strong
 
 LDFLAGS		=	-L$(LIBFT_DIR) -lft -lreadline
 
@@ -17,21 +17,23 @@ SRCDIR		=	src
 BUILTINDIR	=	$(SRCDIR)/builtin
 LEXERDIR	=	$(SRCDIR)/lexer
 EXECDIR		=	$(SRCDIR)/exec
+DEBUGDIR	=	$(SRCDIR)/debug
 
+# $(EXECDIR)/exec.c
+# $(BUILTINDIR)/export.c
+# $(BUILTINDIR)/unset.c
 # $(BUILTINDIR)/cd.c
 # $(BUILTINDIR)/echo.c
-# $(BUILTINDIR)/env.c
-# $(BUILTINDIR)/exit.c
-# $(BUILTINDIR)/export.c
 # $(BUILTINDIR)/pwd.c
-# $(BUILTINDIR)/unset.c
-# $(EXECDIR)/exec.c
 
 # Source files
 SRCS		=	$(SRCDIR)/minishell.c \
+				$(BUILTINDIR)/env.c \
+				$(BUILTINDIR)/exit.c \
 				$(LEXERDIR)/lexer.c \
 				$(LEXERDIR)/redirections.c \
-				$(LEXERDIR)/split_w_qoutes.c
+				$(LEXERDIR)/split_w_qoutes.c \
+				$(DEBUGDIR)/print_debug.c
 
 # Object files
 OBJS		=	$(SRCS:.c=.o)
