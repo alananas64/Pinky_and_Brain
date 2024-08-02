@@ -1,3 +1,13 @@
+### RANDOM ###
+
+dthis is a test case
+bthis is a test case
+this is a test case
+cthis is a test case
+athis is a test case
+
+### RANDOM ###
+
 /**
  * qoutes or not (double and single)
  * expansion $ ($PATH $HOME) get it from env
@@ -27,4 +37,5 @@ redirections
 
 
 !!!!!!!!WARNINGS!!!!!!!!!!
-make command is not working .....31 july
+make command is not working .....31st july
+brain: make command is working ..... 1st july
