@@ -1,16 +1,10 @@
 #include "../../inc/builtin.h"
 
-typedef struct s_list
+t_builtins	*create_new_node(void *content)
 {
-	char	*content;
-	struct s_list	*next;
-}	t_list;
+	t_builtins	*newnode;
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*newnode;
-
-	newnode = (t_list *)malloc(sizeof(t_list));
+	newnode = (t_builtins *)malloc(sizeof(t_builtins));
 	if (!(newnode))
 		return (NULL);
 	newnode -> content = content;
@@ -18,7 +12,7 @@ t_list	*ft_lstnew(void *content)
 	return (newnode);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_builtins	*find_last_node(t_builtins *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -29,9 +23,9 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	add_node_at_end(t_builtins **lst, t_builtins *new)
 {
-	t_list	*last;
+	t_builtins	*last;
 
 	if ((lst == NULL) || (new == NULL))
 		return ;
@@ -40,11 +34,11 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	last = ft_lstlast(*lst);
+	last = find_last_node(*lst);
 	last -> next = new;
 }
 
-void	print(t_list *root)
+void	print(t_builtins *root)
 {
 	while (root != NULL)
 	{
@@ -53,18 +47,22 @@ void	print(t_list *root)
 	}
 }
 
-void env_command(char **env)
+t_builtins *env_command(char **env)
 {
 	int	i;
-	t_list	*env_key_value;
+	t_builtins	*env_key_value;
 
 	i = 0;
-	// env_key_value = NULL; // is it important to set it as null in the begining
+	env_key_value = NULL;
 	while (env[i])
 	{
-		ft_lstadd_back(&env_key_value, ft_lstnew(env[i]));
+		add_node_at_end(&env_key_value, create_new_node(env[i]));
 		i++;
 	}
-	print(env_key_value);
-	return (0);
+	// print(env_key_value);
+	return(env_key_value);
 }
+// int main(int arc, char **arg, char **env)
+// {
+// 	env_command(env);
+// }
