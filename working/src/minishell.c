@@ -1,5 +1,4 @@
 #include "../inc/minishell.h"
-#include "../inc/struct.h"
 
 int	interactive_mode(void)
 {

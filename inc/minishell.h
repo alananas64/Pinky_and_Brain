@@ -3,106 +3,47 @@
 
 # define MAX_INPUT 262144
 # define MAX 2048
+# define TRUE 1
+# define FREE(X) if(X) free((void*)X)
+/* _BSD_MACHINE_SIGNAL_H_ */
+# if defined (__i386__) || defined(__x86_64__)
+# include "i386/signal.h"
+# else
+#error architecture not supported
+#endif
 
-# include "parse.h"
+/* --------------------------------- minishell ------------------------------ */
+
+# include "../zlibft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "struct.h"
+# include "lexer.h"
+# include "exec.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <ctype.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
-
-/* --------------------------------- minishell ------------------------------ */
-
 # include <stdlib.h>
 # include <string.h>
-# include <sys/types.h>
 # include <signal.h>
-# include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
-/* --------------------------------- minishell ------------------------------ */
+/* --------------------------------- minishell.c ---------------------------- */
 
-/* --------------------------------- minishell ------------------------------ */
+extern int	g_last_exit_code;
 
-// structs
-typedef enum e_token
-{
-	Word,
-	Name,
-	Assign,
-	Op_redir,
-	Op_pipe,
-	Variable,
-	Sq_open,
-	Sq_closed,
-	Dq_open,
-	Dq_closed,
-	Whitespace,
-	Illegal
-}	t_token;
+int			interactive_mode(t_minishell *shell);
+void		initialize_struct(t_cmdline *command);
+void		extract_redirections(char *str_line, t_cmdline *command);
+void		print_debug(t_cmdline *cmdline, char **command);
+t_cmdline	*parsecmd(const char *strline);
 
-// Define a t_token structure
-typedef struct s_token
-{
-	token_type		type;
-	char			*value;
-	struct s_token	*next;
-}	t_token;
+/* --------------------------------- signal --------------------------------- */
 
-typedef struct s_command
-{
-	char				**argv;
-	int					argc;
-	char				*cmd;
-	struct s_command	*next;
-}	t_command;
-
-typedef struct s_cmdline
-{
-	char				*arguments[MAX_ARGUMENTS];
-	int					argcount;
-	char const			*input_redirect;
-	char const			*output_redirect;
-	int					background;
-	struct s_cmdline	*next;
-}	t_cmdline;
-
-typedef struct s_minishell
-{
-	char		**env;
-	char		*pwd;
-	t_token		*history;
-	t_command	*commands;
-}	t_minishell;
-
-/* --------------------------------- minishell ------------------------------ */
-
-int		ft_atoi(const char *nptr);
-char	*ft_strdup(const char *s1);
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-
-/* --------------------------------- builtin -------------------------------- */
-
-char	**get_env(void);
-char	*get_path(void);
-
-/* --------------------------------- builtin -------------------------------- */
-
-
-/* --------------------------------- minishell ------------------------------ */
-
-/* --------------------------------- parser --------------------------------- */
-/* --------------------------------- parser --------------------------------- */
-
-/* --------------------------------- exec ----------------------------------- */
-
-// void execute_command(t_command *cmd, minishell *shell);
-
-/* --------------------------------- exec ----------------------------------- */
+void		handle_sigint(int sig);
+void		handle_sigquit(void);
 
 #endif

@@ -1,10 +1,9 @@
 #include "../../inc/lexer.h"
-#include "../../inc/minishell.h"
 
 void	initialize_struct(t_cmdline *command_struct)
 {
-		command_struct->input_redirect = NULL;
-		command_struct->output_redirect = NULL;
+	command_struct->input_redirect = NULL;
+	command_struct->output_redirect = NULL;
 }
 
 // void	copy_word_util(char *str, char *end, char *begin)
@@ -70,7 +69,7 @@ void	extract_redirections(char	*str_line, t_cmdline *command) //what if they wer
 		if (*str == '<')
 		{
 			free (command->input_redirect);
-			command->input_redirect = copy_word(str + 1);
+			// command->input_redirect = copy_word(str + 1);
 			command->input_redirect = copy_word(str + 1);
 		}
 		else
@@ -81,6 +80,8 @@ void	extract_redirections(char	*str_line, t_cmdline *command) //what if they wer
 		*(str++) = 0;
 	}
 }
+
+/* mahahahaad */
 
 /* ************************************************************************** */
 /*

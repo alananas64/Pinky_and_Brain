@@ -1,5 +1,4 @@
 #include "../../inc/lexer.h"
-#include "../../inc/minishell.h"
 
 char **check_quotes(char **pipe_splitted)
 {
@@ -64,8 +63,8 @@ char	*trimcleanstring(char *str)
 char	**lexer(char *user_input)
 {
 	char	*no_spaces_input;
-	char** pipe_splitted;
-	char** checked_quotes;
+	char	**pipe_splitted;
+	char	**checked_quotes;
 
 	no_spaces_input = trimcleanstring(user_input);
 	pipe_splitted = split_string(no_spaces_input, '|');

@@ -75,7 +75,4 @@ fclean: clean
 	$(RM) $(NAME)
 	make -C $(LIBFT_DIR) fclean
 
-debug: CFLAGS += -g3 -fsanitize=address
-debug: all
-
 re: fclean all

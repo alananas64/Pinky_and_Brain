@@ -1,5 +1,4 @@
-#include "../../inc/debug.h"
-// #include "../../inc/struct.h"
+// #include "../../inc/debug.h"
 
 void	wr_color(const char *color, const char *format, ...)
 {
@@ -10,17 +9,27 @@ void	wr_color(const char *color, const char *format, ...)
 	printf("%s", color);
 	vsnprintf(buffer, 1024, format, args);
 	fputs(buffer, stdout);
-	printf("%s", RESET_COLOR);
+	printf("%s", RESET);
 	va_end(args);
 }
 
-void	print_debug(t_cmdline *cmdline)
+void	print_debug(t_cmdline *cmdline, char **command)
 {
-	if (cmdline->user_input)
-		wr_color (GREEN, "\tuser_input: {%s}\n", cmdline->user_input);
-	if (cmdline->input_redirect)
-		wr_color (GREEN, "input redirect: {%s}\n", cmdline->input_redirect);
-	if (cmdline->output_redirect)
-		wr_color (GREEN, "output redirect: {%s}\n", cmdline->output_redirect);
+	t_cmdline	*tmpcmd;
+	int			i;
 
+	i = -1;
+	tmpcmd = cmdline;
+	while (tmpcmd != NULL)
+	{
+		if (tmpcmd->user_input)
+			wr_color (CYAN, "\tuser_input: {%s}\n", tmpcmd->user_input);
+		if (tmpcmd->input_redirect)
+			wr_color (RED, "input redirect: {%s}\n", tmpcmd->input_redirect);
+		if (tmpcmd->output_redirect)
+			wr_color (RED, "output redirect: {%s}\n", tmpcmd->output_redirect);
+		tmpcmd = tmpcmd->next;
+	}
+	while (command[++i]) // debugging while loop
+		wr_color (MAGENTA, "cmd[%i] = {%s}\n", i, command[i]);
 }
