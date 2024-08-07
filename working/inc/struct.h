@@ -1,5 +1,5 @@
-#ifndef STUCT_H
-# define STUCT_H
+#ifndef STRUCT_H
+# define STRUCT_H
 
 # define MAX_ARGUMENTS 256
 
@@ -7,61 +7,48 @@
 # include <stdarg.h>
 
 // structs
-typedef enum e_token
+typedef enum e_cmdtype
 {
-		Word,
-		Name,
-		Assign,
-		Op_redir,
-		Op_pipe,
-		Variable,
-		Sq_open,
-		Sq_closed,
-		Dq_open,
-		Dq_closed,
-		Whitespace,
-		Illegal
-}       t_token;
+	Word,
+	Name,
+	Assign,
+	Op_redir,
+	Op_pipe,
+	Variable,
+	Sq_open,
+	Sq_closed,
+	Dq_open,
+	Dq_closed,
+	Whitespace,
+	Illegal
+}	t_cmdtype;
 
-typedef struct s_env
+// Define a t_token structure
+typedef struct s_token
 {
-	char				*env;
-	char				*key;
-	char				*value;
-	struct s_cmdline	*next;
-}	t_env;
-
-/*
-	printf ("%s%s", env->key, env->value);
-*/
+	t_cmdtype		type;
+	char			*value;
+	struct s_token	*next;
+}	t_token;
 
 typedef struct s_cmdline
 {
-	char				*user_input;
 	char				*cmd;
+	char				*user_input;
+	char				*arguments[MAX_ARGUMENTS];
+	int					argcount;
 	char				*input_redirect;
 	char				*output_redirect;
+	int					background;
 	struct s_cmdline	*next;
 }	t_cmdline;
 
 typedef struct s_minishell
 {
-	char				*user_input;
-	char				*arguments[MAX_ARGUMENTS];
-	int					argcount;
-	char const			*input_redirect;
-	char const			*output_redirect;
-	int					background;
-	struct t_env		*env;
-	struct s_minishell	*next;
+	char		**env;
+	char		*pwd;
+	t_token		*history;
+	t_cmdline	*commands;
 }	t_minishell;
-
-// typedef struct s_minishell
-// {
-// 	char		**env;
-// 	char		*pwd;
-// 	t_token		*history;
-// 	t_command	*commands;
-// }	t_minishell;
 
 #endif
