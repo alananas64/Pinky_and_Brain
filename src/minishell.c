@@ -14,7 +14,7 @@ int	interactive_mode(void)
 		initialize_struct(&cmdline);
 
 		extract_redirections(*command , &cmdline);
-		print_debug(&cmdline);
+		print_debug(&cmdline, command);
 		free(cmdline.input_redirect);
 		free(cmdline.output_redirect);
 		// int i = -1; // debugging while loop

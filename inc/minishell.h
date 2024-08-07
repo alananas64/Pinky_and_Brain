@@ -35,7 +35,6 @@
 
 extern int	g_last_exit_code;
 
-int			interactive_mode(t_minishell *shell);
 void		initialize_struct(t_cmdline *command);
 void		extract_redirections(char *str_line, t_cmdline *command);
 void		print_debug(t_cmdline *cmdline, char **command);
