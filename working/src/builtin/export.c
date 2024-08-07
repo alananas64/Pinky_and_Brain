@@ -1,5 +1,6 @@
 #include "../../inc/builtin.h"
 
+//this file has alot of functions( 9 functions) , needed to pe divided into 2 files
 char	*string_after_finding_c(const char *s, int c) //printing after the c till the end
 {
 	char	n;
@@ -22,7 +23,7 @@ char	*string_after_finding_c(const char *s, int c) //printing after the c till t
 		return (str + i);
 	return (NULL);
 }
-static char	*copying_with_i_chars(char *src, char *dest, int i)
+char	*copying_with_i_chars(char *src, char *dest, int i)
 {
 	unsigned int	j;
 
@@ -38,15 +39,14 @@ static char	*copying_with_i_chars(char *src, char *dest, int i)
 
 char	*copying_the_key(char *src, int i)
 {
-	// unsigned int	i;
 	char			*dest;
 
-	// i = ft_strlen(src);
 	dest = (char *)malloc(sizeof(char) * i + 1);
 	if (!(dest))
 		return (NULL);
 	return (copying_with_i_chars(src, dest, i));
 }
+
 char	*copying_value_of_key(char *src)
 {
 	unsigned int	i;
@@ -70,7 +70,7 @@ size_t	ft_strlen(const char *str)
 	}
 	return (i);
 }
-static size_t	ft_stop_in_equal(const char *str)
+size_t	ft_stop_in_equal(const char *str)
 {
 	size_t	i;
 
@@ -82,7 +82,7 @@ static size_t	ft_stop_in_equal(const char *str)
 	return (i);
 }
 
-static int	ft_isalpha_is_underscore(int c)
+int	ft_isalpha_is_underscore(int c)
 {
 	if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c == 95))
 		return (1);
@@ -90,7 +90,7 @@ static int	ft_isalpha_is_underscore(int c)
 		return (0);
 }
 
-static int	check_key_is_valid(char *arg)
+int	check_key_is_valid(char *arg)
 {
 	int i;
 
@@ -112,7 +112,7 @@ static int	check_key_is_valid(char *arg)
  * 1) list of env to append to it
  * 2) args that the user input in terminal cc the string that has key and value
 */
-void export_command(t_builtins **list, char *arg)
+t_environment *export_command(t_environment **list, char *arg)
 {
 	int i;
 	int j;
@@ -121,35 +121,37 @@ void export_command(t_builtins **list, char *arg)
 
 	i = 0;
 	j = 0;
-	t_builtins *env_list = *list;
-	value = NULL;
+	t_environment *env_list = *list;
+	value = NULL; // is this really needed?
 	if (!arg)
-		return;
-	while(arg[i] != '\0')
+		return(*list);
+	while(arg[j] != '\0')
 	{
 		if (check_key_is_valid(arg) == 1)
 		{
-			printf("error your key is not alpha\n\n\n");
-			return ;
+			printf("error your key is not alpha\n\n\n"); // we should get out here oe return or exit almoheem
 		}
 		i = ft_stop_in_equal(arg);
 		key = copying_the_key(arg, i);
 		value = copying_value_of_key(string_after_finding_c(arg, '='));
-		// printf("\n\n\n____key is____%s____________\n\n\n", key);
-		// printf("\n\n\n_____value is______%s____________\n\n\n", value);
-		break; // i  need to stop the loop properly
+		j++;
 	}
-	// if(arg[i] == '\0') // if no error occcured add the node to the end of the env list
-		add_node_at_end(&env_list, create_new_node(arg));
+	add_node_at_end(&env_list, create_new_node(key, value));
+	return(*list);
 }
-int main(int arc, char **arg, char **env)
-{
-	t_builtins	*env_before_export;
-	t_builtins	*exported_env;
-	char *token_string;
+// int main(int arc, char **arg, char **env)
+// {
+// 	t_environment	*env_export;
+// 	t_environment	*exported_env;
+// 	char *token_string;
 
-	token_string = "EXPIRE=hello=uncle";
-	env_before_export = env_command(env);
-	export_command(&env_before_export, token_string);
-	print(env_before_export);
-}
+// 	token_string = "hi=hello";
+// 	env_export = env_command(env);
+// 	printf("\n\n\n\n");
+// 	print(env_export); // original env
+// 	printf("\n\n\n\n");
+// 	env_export = export_command(&env_export, token_string);
+// 	printf("\n\n\n\n");
+// 	print(env_export); // env after exporting
+// 	printf("\n\n\n\n");
+// }

@@ -1,18 +1,19 @@
 #include "../../inc/builtin.h"
 
-t_builtins	*create_new_node(void *content)
+t_environment	*create_new_node(void *key, void *value)
 {
-	t_builtins	*newnode;
+	t_environment	*newnode;
 
-	newnode = (t_builtins *)malloc(sizeof(t_builtins));
+	newnode = (t_environment *)malloc(sizeof(t_environment));
 	if (!(newnode))
 		return (NULL);
-	newnode -> content = content;
+	newnode ->key = key;
+	newnode ->value = value;
 	newnode -> next = NULL;
 	return (newnode);
 }
 
-t_builtins	*find_last_node(t_builtins *lst)
+t_environment	*find_last_node(t_environment *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -23,9 +24,9 @@ t_builtins	*find_last_node(t_builtins *lst)
 	return (lst);
 }
 
-void	add_node_at_end(t_builtins **lst, t_builtins *new)
+void	add_node_at_end(t_environment **lst, t_environment *new)
 {
-	t_builtins	*last;
+	t_environment	*last;
 
 	if ((lst == NULL) || (new == NULL))
 		return ;
@@ -38,31 +39,45 @@ void	add_node_at_end(t_builtins **lst, t_builtins *new)
 	last -> next = new;
 }
 
-void	print(t_builtins *root)
+void	print(t_environment *root)
 {
 	while (root != NULL)
 	{
-		printf("%s\n", root->content);
+		printf("%s%s\n", root->key, root->value);
 		root = root->next;
 	}
 }
 
-t_builtins *env_command(char **env)
+t_environment *env_command(char **env)
 {
-	int	i;
-	t_builtins	*env_key_value;
+	int				j;
+	int				i;
+	int				offset;
+	char			*key;
+	char			*value;
+	t_environment	*newnode;
+	t_environment	*env_key_value;
 
-	i = 0;
+	j = 0;
+	offset = 0;
 	env_key_value = NULL;
-	while (env[i])
+	while (env[j])
 	{
-		add_node_at_end(&env_key_value, create_new_node(env[i]));
-		i++;
+		i = 0;
+		i = ft_stop_in_equal(env[j]);
+		key = copying_the_key(env[j], i);
+		value = copying_value_of_key(string_after_finding_c(env[j], '='));
+		newnode = create_new_node(key, value);
+		add_node_at_end(&env_key_value, newnode);
+		j++;
 	}
-	// print(env_key_value);
 	return(env_key_value);
 }
+
 // int main(int arc, char **arg, char **env)
 // {
-// 	env_command(env);
+// 	t_environment *test;
+
+// 	test = env_command(env);
+// 	print(test);
 // }

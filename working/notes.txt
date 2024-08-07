@@ -37,5 +37,6 @@ redirections
 
 
 !!!!!!!!WARNINGS!!!!!!!!!!
-make command is not working .....31st july
+pinkey : make command is not working .....31st july
 brain: make command is working ..... 1st july
+
