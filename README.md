@@ -1,5 +1,4 @@
-# baking_classes
-uncle and aunties
+# Pinky and Brain
 
 <!-- TODO we should handle memory leaks when a signal is sent to the program (minishell) -->
 <!-- TODO (write your own TODO list here) -->
