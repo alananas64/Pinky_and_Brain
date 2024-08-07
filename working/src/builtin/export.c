@@ -23,6 +23,7 @@ char	*string_after_finding_c(const char *s, int c) //printing after the c till t
 		return (str + i);
 	return (NULL);
 }
+
 char	*copying_with_i_chars(char *src, char *dest, int i)
 {
 	unsigned int	j;
@@ -59,17 +60,6 @@ char	*copying_value_of_key(char *src)
 	return (copying_with_i_chars(src, dest, i));
 }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
 size_t	ft_stop_in_equal(const char *str)
 {
 	size_t	i;
@@ -139,6 +129,7 @@ t_environment *export_command(t_environment **list, char *arg)
 	add_node_at_end(&env_list, create_new_node(key, value));
 	return(*list);
 }
+
 // int main(int arc, char **arg, char **env)
 // {
 // 	t_environment	*env_export;

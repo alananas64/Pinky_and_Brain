@@ -43,12 +43,20 @@ typedef struct s_cmdline
 	struct s_cmdline	*next;
 }	t_cmdline;
 
+typedef struct s_environment
+{
+	char					*content;
+	struct s_environment	*next;
+	char					*key;
+	char					*value;
+}	t_environment;
+
 typedef struct s_minishell
 {
-	char		**env;
-	char		*pwd;
-	t_token		*history;
-	t_cmdline	*commands;
+	char			*pwd;
+	t_token			*history;
+	t_cmdline		*commands;
+	t_environment	*env;
 }	t_minishell;
 
 #endif

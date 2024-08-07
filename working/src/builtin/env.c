@@ -71,6 +71,7 @@ t_environment *env_command(char **env)
 		add_node_at_end(&env_key_value, newnode);
 		j++;
 	}
+	// print(env_key_value);
 	return(env_key_value);
 }
 
