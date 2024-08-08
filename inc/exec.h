@@ -2,5 +2,6 @@
 # define EXEC_H
 
 # include "struct.h"
+# include "builtin.h"
 
 #endif
