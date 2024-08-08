@@ -1,50 +1,59 @@
-#include "../inc/minishell.h"
+#include "minishell.h"
 
-int	interactive_mode(void)
+/* Set up signal handlers */
+/* Function to initialize the shell */
+void	init_shell(t_minishell *shell, char **env)
 {
-	char		**command;
-	t_cmdline	cmdline;
+	struct sigaction	act;
+	
+	handle_sigquit();
+	ft_memset(&act, 0, sizeof(act));
+	act.sa_handler = &handle_sigint;
+	sigaction(SIGINT, &act, NULL);
+
+	shell->env = env_command(env); /* initialize environment variables */
+	shell->pwd = getcwd(NULL, 0); /* initialize current working directory */
+	shell->history->value = NULL;
+	shell->commands->cmd = NULL;
+	shell->commands->user_input = NULL;
+	shell->commands->input_redirect = NULL;
+	shell->commands->output_redirect = NULL;
+}
+
+int	interactive_mode(t_minishell *shell)
+{
+	char **command;
 
 	while (1)
 	{
-		cmdline.user_input = readline("😎minishell-v1$ ");
-		if (!cmdline.user_input)
-			return (perror("realine error"), 126);
-		command = lexer(cmdline.user_input);
-		initialize_struct(&cmdline);
+		shell->commands->user_input = readline("minishell$> ");
+		if (!shell->commands->user_input)
+			return (printf("exit\n"), exit (1), 1);
+		command = lexer(shell->commands->user_input);
 
-		extract_redirections(*command , &cmdline);
-		print_debug(&cmdline, command);
-		free(cmdline.input_redirect);
-		free(cmdline.output_redirect);
-		// int i = -1; // debugging while loop
-		// while(command[++i])
-		// 	printf("string[%i] = {%s}\n", i, command[i]);
-		// free (user_input);
+		// shell->commands = parsecmd(command);
+		extract_redirections(*command, shell->commands);
+		print_debug(shell->commands, command);
+		free_struct(shell->commands);
 	}
 	return (0);
 }
 
-int	main(int ac, char **av)
+/* grep "ERROR" log.txt 2>/dev/null | sort | uniq -c | sort -rn > error_counts.txt */
+int	main (int ac, char **av, char **env)
 {
+	t_minishell	*shell;
+
 	if (1 < ac)
 		return (printf("%s: %s: is a file or a directory", av[0], av[1]), 126);
-	if (interactive_mode())
-		return (printf ("vegy sed!"), 126); /* returns a random value does not have a meaning */
+	printf ("{%s}: {%i}\n", av[0], getpid());
+	shell = (t_minishell *)malloc(sizeof(t_minishell));
+	shell = ft_memset(shell, 0, sizeof(shell));
+	shell->history = (t_token *)malloc(sizeof(t_token));
+	shell->commands = (t_cmdline *)malloc(sizeof(t_cmdline));
+	shell->env = (t_environment *)malloc(sizeof(t_environment));
+	init_shell(shell, env);
+	if (interactive_mode(shell))
+		return (printf ("vegy sed!"), 126);
 	return (0);
 }
-
-/**
- * --> SIGNALS <--
- * 0: The command executed successfully.
- * 1: The shell encountered a syntax error or an error in a startup file (e.g.,
-	~/.bashrc).
- * 2: The shell encountered an error while reading input (e.g., Ctrl+D was
- 	pressed).
- * 3-125: The command failed, and the specific value indicates the type of
- 	error.
- * 126: The command was not executable (e.g., it was a directory).
-	minishell does not take args
- * 127: The command was not found.
- * 128-255: The command was terminated by a signal (e.g., Ctrl+C).
-*/
