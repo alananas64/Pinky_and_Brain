@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "lexer.h"
 
 /* Set up signal handlers */
 /* Function to initialize the shell */
@@ -11,9 +12,8 @@ void	init_shell(t_minishell *shell, char **env)
 	act.sa_handler = &handle_sigint;
 	sigaction(SIGINT, &act, NULL);
 
-	shell->env = env_command(env); /* initialize environment variables */
-	shell->pwd = getcwd(NULL, 0); /* initialize current working directory */
-	shell->history->value = NULL;
+	shell->env = env_command(env);
+	shell->pwd = getcwd(NULL, 0);
 	shell->commands->cmd = NULL;
 	shell->commands->user_input = NULL;
 	shell->commands->input_redirect = NULL;
@@ -22,18 +22,27 @@ void	init_shell(t_minishell *shell, char **env)
 
 int	interactive_mode(t_minishell *shell)
 {
-	char **command;
-
 	while (1)
 	{
 		shell->commands->user_input = readline("minishell$> ");
 		if (!shell->commands->user_input)
 			return (printf("exit\n"), exit (1), 1);
-		command = lexer(shell->commands->user_input);
+		shell->commands->cmd = lexer(shell->commands->user_input);
+		printf("input = {%s}\n", shell->commands->user_input);
+		if (tokenization(shell, shell->commands->user_input) == 1)
+			continue;
+		extract_redirections(*shell->commands->cmd, shell->commands);
+		shell->commands = parsecmd(command);
 
-		// shell->commands = parsecmd(command);
-		extract_redirections(*command, shell->commands);
-		print_debug(shell->commands, command);
+
+		print_debug(shell->commands, shell->commands->cmd);
+		if (parse == 0)
+			exec();
+		else
+		{
+			printf("invalid syntax\n");
+			free_struct(shell->commands);
+		}
 		free_struct(shell->commands);
 	}
 	return (0);
@@ -49,7 +58,7 @@ int	main (int ac, char **av, char **env)
 	printf ("{%s}: {%i}\n", av[0], getpid());
 	shell = (t_minishell *)malloc(sizeof(t_minishell));
 	shell = ft_memset(shell, 0, sizeof(shell));
-	shell->history = (t_token *)malloc(sizeof(t_token));
+	shell->token = (t_token *)malloc(sizeof(t_token));
 	shell->commands = (t_cmdline *)malloc(sizeof(t_cmdline));
 	shell->env = (t_environment *)malloc(sizeof(t_environment));
 	init_shell(shell, env);

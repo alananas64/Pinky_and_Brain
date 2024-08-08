@@ -41,12 +41,12 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		return (0);
 }
 
-// /**
-//  * loops in env linked list until it reached the i postion
-//  * when i delet the node by :
-//  *		make the node before i points to the node after i
-//  *		make i points to NULL
-// */
+/**
+ * loops in env linked list until it reached the i postion
+ * when i delet the node by :
+ *		make the node before i points to the node after i
+ *		make i points to NULL
+*/
 
 void delete_content(void *content)
 {
@@ -64,16 +64,16 @@ void delet_content_of_a_node(t_environment **lst, void (*del)(void*))
 	free(temp);
 }
 
-// /**
-//  * roam around env linked list
-//  * look for the key
-//  * delet that node
-//  * return the new env linked list
-//  *
-//  * takes 2 params:
-//  * 1)env linked list
-//  * 2)the key that u want to delet
-// */
+/**
+ * roam around env linked list
+ * look for the key
+ * delet that node
+ * return the new env linked list
+ *
+ * takes 2 params:
+ * 1)env linked list
+ * 2)the key that u want to delet
+*/
 
 t_environment *unset_command(t_environment **list, char *key)
 {

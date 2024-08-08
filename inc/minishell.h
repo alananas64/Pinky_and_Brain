@@ -21,7 +21,6 @@
 # include "debug.h"
 # include "exec.h"
 # include "lexer.h"
-# include "minishell.h"
 # include "struct.h"
 # include "utils.h"
 # include <unistd.h>
@@ -39,10 +38,9 @@
 
 extern int	g_last_exit_code;
 
-void		initialize_struct(t_cmdline *command);
 void		extract_redirections(char *str_line, t_cmdline *command);
 void		print_debug(t_cmdline *cmdline, char **command);
-// t_cmdline	*parsecmd(const char **strlines);
+t_cmdline	*parsecmd(char **strlines);
 
 /* --------------------------------- signal --------------------------------- */
 

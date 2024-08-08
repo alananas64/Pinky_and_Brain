@@ -1,5 +1,5 @@
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef LEXER_H
+# define LEXER_H
 
 # include "minishell.h"
 # include "struct.h"
@@ -12,10 +12,12 @@
 char	**check_quotes(char **pipe_splitted);
 char	*trimcleanstring(char *str);
 char	**lexer(char *user_input);
+void	extract_redirections(char *str_line, t_cmdline *command);
 
 //--------------------------split_w_qoutes.c--------------
 int		count_substrings(const char *s, char delimiter, int *double_quote, int *single_quote);
 char	**split_string(const char *s, char delimiter);
+int		tokenization(t_minishell *data, char *str);
 
 //--------------------------redirections.c----------------
 
