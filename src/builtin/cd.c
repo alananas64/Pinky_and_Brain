@@ -1,4 +1,5 @@
 #include "../../inc/builtin.h"
+// #include "../../inc/builtin.h"
 
 char	*get_value_of_certin_key(t_environment **list, char *key)
 {
@@ -14,14 +15,34 @@ char	*get_value_of_certin_key(t_environment **list, char *key)
 	return(NULL);
 }
 
-void	pwd_command(t_environment *env)
+void	cd_command(t_environment *env, char *arg_after_cd)
 {
-	printf("%s\n", get_value_of_certin_key(&env, "PWD"));
+	char *path;
+
+	// debug:
+	char cwd[256];
+
+	if ((!arg_after_cd))// go to the home dir path
+	{
+		path = get_value_of_certin_key(&env, "HOME");
+		printf("\n\nthe path u r putting is : %s\n\n\n", path);
+		chdir(path);
+	}
+	if (arg_after_cd)
+	{
+		chdir(arg_after_cd);
+		//debug:
+		if (getcwd(cwd, sizeof(cwd)) != NULL)
+			printf("Current working directory: %s\n", cwd);
+		else
+			return;
+	}
 }
 
 // int main(int arc, char **arg, char **env)
 // {
 // 	t_environment *test;
 // 	test = env_command(env);
-// 	pwd_command(test);
+// 	cd_command(test, arg[1]);
 // }
+
