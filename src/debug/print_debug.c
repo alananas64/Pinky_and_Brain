@@ -1,4 +1,4 @@
-// #include "../../inc/debug.h"
+#include "debug.h"
 
 void	wr_color(const char *color, const char *format, ...)
 {
