@@ -1,4 +1,4 @@
-#include "../../inc/lexer.h"
+#include "lexer.h"
 
 char **check_quotes(char **pipe_splitted)
 {

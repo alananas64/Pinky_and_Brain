@@ -1,8 +1,6 @@
-#include "../../inc/lexer.h"
-#include "../../inc/minishell.h"
+#include "lexer.h"
 
 // echo "hello | world " | wc '"-l' | echo world
-
 static void	free_all(char **strs)
 {
 	int	i;
