@@ -1,6 +1,6 @@
 #ifndef STRUCT_H
-# define STRUCT_H
 
+# define STRUCT_H
 # define MAX_ARGUMENTS 256
 
 // debug
@@ -45,10 +45,10 @@ typedef struct s_cmdline
 
 typedef struct s_environment
 {
-	char					*content;
-	struct s_environment	*next;
+	// char					*content;
 	char					*key;
 	char					*value;
+	struct s_environment	*next;
 }	t_environment;
 
 typedef struct s_minishell

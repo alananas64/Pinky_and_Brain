@@ -2,6 +2,7 @@
 # define PARSE_H
 
 # include "minishell.h"
+# include "struct.h"
 # include <string.h>
 # include <stdlib.h>
 # include <readline/readline.h>

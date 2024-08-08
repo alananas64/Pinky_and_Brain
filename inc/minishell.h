@@ -17,9 +17,13 @@
 # include "../zlibft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "struct.h"
-# include "lexer.h"
+# include "builtin.h"
+# include "debug.h"
 # include "exec.h"
+# include "lexer.h"
+# include "minishell.h"
+# include "struct.h"
+# include "utils.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <ctype.h>
@@ -38,7 +42,7 @@ extern int	g_last_exit_code;
 void		initialize_struct(t_cmdline *command);
 void		extract_redirections(char *str_line, t_cmdline *command);
 void		print_debug(t_cmdline *cmdline, char **command);
-t_cmdline	*parsecmd(const char *strline);
+// t_cmdline	*parsecmd(const char **strlines);
 
 /* --------------------------------- signal --------------------------------- */
 
