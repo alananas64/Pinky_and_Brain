@@ -25,6 +25,14 @@ typedef struct s_list
 }	t_list;
 
 /**
+ *  --- personal addition ---
+*/
+int		is_empty(const char	*str);
+char	*str_clone(const char *source);
+char	*ft_strtok(char *str, const char *delim);
+int		is_space(int c);
+
+/**
  *  --- ft_is functions ---
 */
 int		ft_isalnum(int c);
@@ -32,6 +40,8 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_isprint(int c);
+
 /**
  *  --- ft_mem functions ---
 */

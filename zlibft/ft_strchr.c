@@ -35,10 +35,3 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
-#include <stdio.h>
-
-int main()
-{
-	printf("%s", ft_strchr("hello", 'e'));
-}
