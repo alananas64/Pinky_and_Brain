@@ -34,11 +34,14 @@ char	*copy_word(char	*str)
 	return (word[(int)(end - begin) + 1] = '\0', word);
 }
 
-void	extract_redirections(char	*str_line, t_cmdline *command) //what if they were 2 of them behind each other >> << >< ??
+void	extract_redirections(char *str_line, t_cmdline *command) //what if they were 2 of them behind each other >> << >< ??
 {
+
 	char	*str;
 
 	str = str_line;
+	printf("str_line: {%s}\n", str_line);
+	printf("str: {%s}\n", str);
 	while ((str = strpbrk(str, "<>")))
 	{
 		if (*str == '<')
@@ -49,10 +52,11 @@ void	extract_redirections(char	*str_line, t_cmdline *command) //what if they wer
 		else
 		{
 			free (command->output_redirect);
-			command->output_redirect = copy_word(str+1);
+			command->output_redirect = copy_word(str + 1);
 		}
 		*(str++) = 0;
 	}
+	printf("<<<<<<HERE>>>>>>\n");
 }
 
 /* mahahahaad */

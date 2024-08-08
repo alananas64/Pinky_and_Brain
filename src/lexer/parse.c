@@ -49,55 +49,19 @@ t_cmdline	*parsecmd(char **strlines)
 	t_cmdline	*head;
 	t_cmdline	*last;
 	char		*line;
-	char		*ampersand;
 
 	if (!strlines || !*strlines || is_empty(*strlines))
 		return (NULL);
 	line = str_clone(*strlines);
 	if (line[ft_strlen(line)-1] == '\n')
 		line[ft_strlen(line) - 1] = 0;
-	// ampersand = ft_strchr(line, '&');
-	// if (ampersand)
-	// 	*(ampersand) = 0;
+
 	head = parset_cmdlines(line);
 	last = head;
 	if (last)
 	{
 		while (last->next)
 			last = last->next;
-		// if (ampersand)
-		// 	last->background = 0;
-		// else
-		// 	last->background = 1;
 	}
 	return (free(line), head);
 }
-
-// t_cmdline	*parsecmd(const char *strline)
-// {
-// 	t_cmdline	*head;
-// 	t_cmdline	*last;
-// 	char		*line;
-// 	char		*ampersand;
-
-// 	if (is_empty(strline))
-// 		return (NULL);
-// 	line = str_clone(strline);
-// 	if (line[ft_strlen(line)-1] == '\n')
-// 		line[ft_strlen(line) - 1] = 0;
-// 	ampersand = ft_strchr(line, '&');
-// 	if (ampersand)
-// 		*(ampersand) = 0;
-// 	head = parset_cmdlines(line);
-// 	last = head;
-// 	if (last)
-// 	{
-// 		while (last->next)
-// 			last = last->next;
-// 		if (ampersand)
-// 			last->background = 0;
-// 		else
-// 			last->background = 1;
-// 	}
-// 	return (free (line), head);
-// }
