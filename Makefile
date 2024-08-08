@@ -14,25 +14,30 @@ LIBFT		=	$(LIBFT_DIR)/libft.a
 RM			=	rm -fr
 
 SRCDIR		=	src
+SIGNALDIR	=	$(SRCDIR)/signals
 BUILTINDIR	=	$(SRCDIR)/builtin
 LEXERDIR	=	$(SRCDIR)/lexer
 EXECDIR		=	$(SRCDIR)/exec
+UTILSDIR	=	$(SRCDIR)/utils
 DEBUGDIR	=	$(SRCDIR)/debug
 
 # $(EXECDIR)/exec.c
-# $(BUILTINDIR)/export.c
-# $(BUILTINDIR)/unset.c
-# $(BUILTINDIR)/cd.c
-# $(BUILTINDIR)/echo.c
-# $(BUILTINDIR)/pwd.c
 
 # Source files
 SRCS		=	$(SRCDIR)/minishell.c \
+				$(SIGNALDIR)/signals.c \
 				$(BUILTINDIR)/env.c \
 				$(BUILTINDIR)/exit.c \
+				$(BUILTINDIR)/export.c \
+				$(BUILTINDIR)/unset.c \
+				$(BUILTINDIR)/cd.c \
+				$(BUILTINDIR)/echo.c \
+				$(BUILTINDIR)/pwd.c \
 				$(LEXERDIR)/lexer.c \
+				$(LEXERDIR)/parse.c \
 				$(LEXERDIR)/redirections.c \
 				$(LEXERDIR)/split_w_qoutes.c \
+				$(UTILSDIR)/mem.c \
 				$(DEBUGDIR)/print_debug.c
 
 # Object files
