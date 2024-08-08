@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include "builtin.h"
 
 /*
 *	Checks whether an arg is an -n option flag.

@@ -1,4 +1,4 @@
-#include "../../inc/builtin.h"
+#include "builtin.h"
 
 //this file has alot of functions( 9 functions) , needed to pe divided into 2 files
 char	*string_after_finding_c(const char *s, int c) //printing after the c till the end
@@ -26,7 +26,7 @@ char	*string_after_finding_c(const char *s, int c) //printing after the c till t
 
 char	*copying_with_i_chars(char *src, char *dest, int i)
 {
-	unsigned int	j;
+	int	j;
 
 	j = 0;
 	while ((src[j] != '\0') && (j <= i))

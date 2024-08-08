@@ -1,4 +1,4 @@
-#include "../../inc/builtin.h"
+#include "builtin.h"
 
 t_environment	*create_new_node(void *key, void *value)
 {
@@ -63,7 +63,7 @@ t_environment *env_command(char **env)
 	env_key_value = NULL;
 	while (env[j])
 	{
-		i = 0;
+		// i = 0;
 		i = ft_stop_in_equal(env[j]);
 		key = copying_the_key(env[j], i);
 		value = copying_value_of_key(string_after_finding_c(env[j], '='));
