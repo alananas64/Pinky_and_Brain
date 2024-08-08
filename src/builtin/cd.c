@@ -1,18 +1,5 @@
 #include "../../inc/builtin.h"
-//change directory
-// cd with only a relative or absolute path
-// cd without any options or args takes u to root
-//cd / or ~ takes u to root abey!!!! what is the difference
-//cd .. goes back
-// cd - do smth idk
-/**
- * cd [directory]
- * cd ~
- * cd /path/to/directory
- * cd ..      change to parent directory
- * cd -  change to the previous working directory
- *
-*/
+// #include "../../inc/builtin.h"
 
 char	*get_value_of_certin_key(t_environment **list, char *key)
 {
@@ -52,10 +39,10 @@ void	cd_command(t_environment *env, char *arg_after_cd)
 	}
 }
 
-int main(int arc, char **arg, char **env)
-{
-	t_environment *test;
-	test = env_command(env);
-	cd_command(test, arg[1]);
-}
+// int main(int arc, char **arg, char **env)
+// {
+// 	t_environment *test;
+// 	test = env_command(env);
+// 	cd_command(test, arg[1]);
+// }
 

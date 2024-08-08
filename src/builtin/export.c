@@ -1,4 +1,4 @@
-#include "builtin.h"
+#include "../../inc/builtin.h"
 
 //this file has alot of functions( 9 functions) , needed to pe divided into 2 files
 char	*string_after_finding_c(const char *s, int c) //printing after the c till the end

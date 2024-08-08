@@ -1,4 +1,4 @@
-#include "builtin.h"
+#include "../../inc/builtin.h"
 
 t_environment	*create_new_node(void *key, void *value)
 {
