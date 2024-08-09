@@ -151,10 +151,6 @@ int	tokenization(t_minishell *data, char *str)
 	i = -1;
 	start = 0;
 	end = ft_strlen(str);
-	if (end == 0) {
-		printf("end = %d\n", end);
-		return (1);
-	}
 	status = DEFAULT;
 	while (++i <= end)
 	{

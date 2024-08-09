@@ -16,13 +16,13 @@ typedef enum e_cmdtype
 	FILENAME,
 	ASSIGN,
 	PIPE,
+	INPUT,
+	HEREDOC,
+	TRUNC, // 
+	APPEND,
 	REDIRECT_IN,
 	REDIRECT_OUT,
-	APPEND,
-	INPUT,
-	TRUNC,
 	END,
-	HEREDOC,
 	Variable,
 	Whitespace,
 	EOC,
@@ -58,6 +58,7 @@ typedef struct s_cmdline
 	char				*input_redirect;
 	char				*output_redirect;
 	int					background;
+	char				*exec_path;
 	struct s_cmdline	*next;
 }	t_cmdline;
 
@@ -70,10 +71,19 @@ typedef struct s_environment
 
 typedef struct s_minishell
 {
-	char			*pwd;
-	t_token			*token;
+	t_token			*token; // no need for execution
 	t_cmdline		*commands;
 	t_environment	*env;
 }	t_minishell;
 
 #endif
+
+// //coming from parsing
+// |cmd < | -> |cmd > file | -> |cmd > file |
+
+
+// // before we start 'Execution' we create the pipe
+// pipe()
+// write end -> 5======6<- read end
+// | ls > writeend of pipe |  ->   |wc -l < readend of pipe |
+// execve()

@@ -20,6 +20,7 @@ void	print_debug(t_cmdline *cmdline, char **command)
 
 	i = -1;
 	tmpcmd = cmdline;
+	(void)command;
 	while (tmpcmd != NULL)
 	{
 		if (tmpcmd->user_input)
@@ -30,6 +31,6 @@ void	print_debug(t_cmdline *cmdline, char **command)
 			wr_color (RED, "output redirect: {%s}\n", tmpcmd->output_redirect);
 		tmpcmd = tmpcmd->next;
 	}
-	while (command[++i]) // debugging while loop
-		wr_color (MAGENTA, "cmd[%i] = {%s}\n", i, command[i]);
+	// while (command[++i]) // debugging while loop
+	// 	wr_color (MAGENTA, "cmd[%i] = {%s}\n", i, command[i]);
 }

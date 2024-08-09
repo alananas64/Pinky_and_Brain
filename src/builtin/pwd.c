@@ -1,6 +1,6 @@
 #include "../../inc/builtin.h"
 
-char	*get_value_of_certin_key(t_environment **list, char *key)
+static char	*get_value_of_certin_key(t_environment **list, char *key)
 {
 	t_environment *env_list = *list;
 	while(env_list)

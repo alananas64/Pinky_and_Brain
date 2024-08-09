@@ -13,7 +13,6 @@ void	init_shell(t_minishell *shell, char **env)
 	sigaction(SIGINT, &act, NULL);
 
 	shell->env = env_command(env);
-	shell->pwd = getcwd(NULL, 0);
 	shell->commands->cmd = NULL;
 	shell->commands->user_input = NULL;
 	shell->commands->input_redirect = NULL;
@@ -28,27 +27,16 @@ int	interactive_mode(t_minishell *shell)
 		if (!shell->commands->user_input)
 			return (printf("exit\n"), exit (1), 1);
 		shell->commands->cmd = lexer(shell->commands->user_input);
-		printf("input = {%s}\n", shell->commands->user_input);
-		if (tokenization(shell, shell->commands->user_input) == 1)
-			continue;
 		extract_redirections(*shell->commands->cmd, shell->commands);
-		shell->commands = parsecmd(command);
-
+		// shell->commands = parsecmd(shell->commands->cmd);
 
 		print_debug(shell->commands, shell->commands->cmd);
-		if (parse == 0)
-			exec();
-		else
-		{
-			printf("invalid syntax\n");
-			free_struct(shell->commands);
-		}
 		free_struct(shell->commands);
 	}
 	return (0);
 }
 
-/* grep "ERROR" log.txt 2>/dev/null | sort | uniq -c | sort -rn > error_counts.txt */
+/* grep "ERROR" log.txt 2>/dev/null | sort | uniq -c | sort -rn < error_counts.txt */
 int	main (int ac, char **av, char **env)
 {
 	t_minishell	*shell;
